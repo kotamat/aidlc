@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フードデリバリー UI モック</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>CityEats Delivery Platform</h1>
+      <p>都市部の一般消費者・レストラン・配達員・運用担当をつなぐ統合オペレーション</p>
+    </div>
+    <nav class="tab-nav">
+      <button class="tab-button active" data-tab="consumer">一般消費者</button>
+      <button class="tab-button" data-tab="restaurant">レストランパートナー</button>
+      <button class="tab-button" data-tab="courier">配達員</button>
+      <button class="tab-button" data-tab="operations">プラットフォーム運用</button>
+    </nav>
+  </header>
+
+  <main class="views">
+    <section id="consumer" class="view active columns-2">
+      <article class="card search-panel">
+        <header>
+          <h2>レストラン検索</h2>
+          <div class="tag">検索 / フィルター</div>
+        </header>
+        <div class="search-input">
+          <input type="text" placeholder="店舗名・料理カテゴリで検索">
+          <button class="secondary">検索</button>
+        </div>
+        <div class="chip-group" data-role="category-filter">
+          <button class="chip active">人気</button>
+          <button class="chip">和食</button>
+          <button class="chip">アジア</button>
+          <button class="chip">ヘルシー</button>
+          <button class="chip">評価 4.5+</button>
+        </div>
+        <div class="card-list restaurant-list">
+          <div class="list-item">
+            <div>
+              <h3>Tokyo Bowl 渋谷店</h3>
+              <p class="muted">丼もの・アジア料理 · 配達時間 25 分</p>
+            </div>
+            <div class="metrics">
+              <span class="rating">4.8 ★</span>
+              <button class="primary ghost">詳細を見る</button>
+            </div>
+          </div>
+          <div class="list-item">
+            <div>
+              <h3>Urban Vegan</h3>
+              <p class="muted">ヘルシー · 配達時間 30 分</p>
+            </div>
+            <div class="metrics">
+              <span class="rating">4.6 ★</span>
+              <button class="primary ghost">詳細を見る</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card payment-panel">
+        <header>
+          <h2>支払い方法</h2>
+          <div class="tag">決済</div>
+        </header>
+        <ul class="payment-list">
+          <li class="payment-item active">
+            <div>
+              <strong>Visa •••• 1234</strong>
+              <p class="muted">有効期限 09/26 · 既定の支払い方法</p>
+            </div>
+            <button class="secondary ghost">変更</button>
+          </li>
+          <li class="payment-item">
+            <div>
+              <strong>Apple Pay</strong>
+              <p class="muted">Satoshi Tanaka</p>
+            </div>
+            <button class="secondary ghost">既定に設定</button>
+          </li>
+          <li class="payment-item">
+            <div>
+              <strong>ギフトカード</strong>
+              <p class="muted">残高 ¥2,500</p>
+            </div>
+            <button class="secondary ghost">チャージ</button>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card tracking-panel">
+        <header>
+          <h2>配達状況</h2>
+          <div class="tag">リアルタイム追跡</div>
+        </header>
+        <div class="order-summary">
+          <h3>注文 #AD-30241</h3>
+          <p class="muted">Tokyo Bowl 渋谷店 · 18:25 配達予定</p>
+        </div>
+        <ol class="timeline">
+          <li class="done">注文確認済み</li>
+          <li class="done">調理中</li>
+          <li class="active">ドライバーが受け取り中</li>
+          <li>配達中</li>
+          <li>お届け完了</li>
+        </ol>
+        <div class="map-placeholder">
+          <span>ライブマッププレビュー</span>
+        </div>
+        <button class="secondary ghost">SMS で共有</button>
+      </article>
+
+      <article class="card history-panel">
+        <header>
+          <h2>再注文</h2>
+          <div class="tag">注文履歴</div>
+        </header>
+        <ul class="history-list">
+          <li>
+            <div>
+              <strong>Sushi Express</strong>
+              <p class="muted">3 項目 · 先週</p>
+            </div>
+            <button class="primary">今すぐ再注文</button>
+          </li>
+          <li>
+            <div>
+              <strong>Urban Vegan</strong>
+              <p class="muted">2 項目 · 2 週間前</p>
+            </div>
+            <button class="primary ghost">カートに追加</button>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card change-panel">
+        <header>
+          <h2>注文内容の変更 / キャンセル</h2>
+          <div class="tag">サポート</div>
+        </header>
+        <form class="change-form">
+          <label>対象注文
+            <select>
+              <option>注文 #AD-30241</option>
+              <option>注文 #AD-29118</option>
+            </select>
+          </label>
+          <label>変更内容
+            <textarea rows="3" placeholder="例: ソースを別添えでお願いします"></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="button" class="secondary ghost">キャンセル申請</button>
+            <button type="submit" class="primary">変更リクエスト送信</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <section id="restaurant" class="view columns-2">
+      <article class="card schedule-panel">
+        <header>
+          <h2>営業時間設定</h2>
+          <div class="tag">店舗設定</div>
+        </header>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>曜日</th>
+              <th>営業</th>
+              <th>ラストオーダー</th>
+              <th>配達可能</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>月曜</td>
+              <td>11:00 - 22:00</td>
+              <td>21:30</td>
+              <td><span class="badge success">オン</span></td>
+            </tr>
+            <tr>
+              <td>火曜</td>
+              <td>11:00 - 22:00</td>
+              <td>21:30</td>
+              <td><span class="badge success">オン</span></td>
+            </tr>
+            <tr>
+              <td>水曜</td>
+              <td>11:00 - 22:00</td>
+              <td>21:30</td>
+              <td><span class="badge warning">一部</span></td>
+            </tr>
+            <tr>
+              <td>木曜</td>
+              <td colspan="2" class="muted">臨時休業</td>
+              <td><button class="secondary ghost small">編集</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card menu-panel">
+        <header>
+          <h2>メニュー管理</h2>
+          <div class="tag">商品管理</div>
+        </header>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-thumb">写真</div>
+            <div>
+              <h3>照り焼きチキンボウル</h3>
+              <p class="muted">¥980 · 売れ筋</p>
+            </div>
+            <button class="secondary ghost">編集</button>
+          </div>
+          <div class="menu-item">
+            <div class="menu-thumb">写真</div>
+            <div>
+              <h3>サーモンポキ</h3>
+              <p class="muted">¥1,100</p>
+            </div>
+            <button class="secondary ghost">編集</button>
+          </div>
+          <button class="dashed-button">新しい商品を追加</button>
+        </div>
+      </article>
+
+      <article class="card orders-panel">
+        <header>
+          <h2>リアルタイム注文</h2>
+          <div class="tag">オペレーション</div>
+        </header>
+        <div class="order-queue">
+          <div class="queue-item">
+            <div>
+              <strong>#AD-30241</strong>
+              <p class="muted">18:10 受注 · 調理中 · 配達員割り当て済み</p>
+            </div>
+            <button class="primary ghost">進捗更新</button>
+          </div>
+          <div class="queue-item">
+            <div>
+              <strong>#AD-30255</strong>
+              <p class="muted">18:12 受注 · 承認待ち</p>
+            </div>
+            <button class="primary">承認</button>
+          </div>
+          <div class="queue-item">
+            <div>
+              <strong>#AD-30260</strong>
+              <p class="muted">18:14 受注 · アレルギー備考あり</p>
+            </div>
+            <button class="secondary ghost">詳細</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card analytics-panel">
+        <header>
+          <h2>売上分析</h2>
+          <div class="tag">インサイト</div>
+        </header>
+        <div class="chart-placeholder">
+          <span>週次 売上 ¥1,280,000</span>
+          <div class="bars">
+            <div style="height: 40%"></div>
+            <div style="height: 65%"></div>
+            <div style="height: 80%"></div>
+            <div style="height: 55%"></div>
+            <div style="height: 90%"></div>
+            <div style="height: 70%"></div>
+            <div style="height: 60%"></div>
+          </div>
+        </div>
+        <div class="insight-list">
+          <p>・ピーク帯: 18 時〜20 時</p>
+          <p>・人気カテゴリ: 丼もの、ポキ</p>
+          <p>・キャンセル率: 1.2%</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="courier" class="view columns-2">
+      <article class="card job-panel">
+        <header>
+          <h2>案件リスト</h2>
+          <div class="tag">稼働計画</div>
+        </header>
+        <div class="filters">
+          <label>エリア
+            <select>
+              <option>渋谷区</option>
+              <option>港区</option>
+              <option>新宿区</option>
+            </select>
+          </label>
+          <label>移動手段
+            <select>
+              <option>自転車</option>
+              <option>バイク</option>
+              <option>徒歩</option>
+            </select>
+          </label>
+        </div>
+        <div class="job-list">
+          <div class="job-item">
+            <div>
+              <strong>#AD-30255 · 港区南青山</strong>
+              <p class="muted">距離 1.8km · 報酬 ¥650 · 18:45 まで</p>
+            </div>
+            <button class="primary">受諾</button>
+          </div>
+          <div class="job-item">
+            <div>
+              <strong>#AD-30260 · 渋谷区神南</strong>
+              <p class="muted">距離 2.1km · 報酬 ¥720 · 19:00 まで</p>
+            </div>
+            <button class="primary ghost">詳細</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card route-panel">
+        <header>
+          <h2>ナビゲーション</h2>
+          <div class="tag">ルート</div>
+        </header>
+        <div class="route-details">
+          <p><strong>現在地:</strong> 渋谷駅ハチ公前</p>
+          <p><strong>ピックアップ:</strong> Tokyo Bowl 渋谷店 (到着予定 18:22)</p>
+          <p><strong>ドロップ:</strong> 東京都渋谷区桜丘町 23-1</p>
+        </div>
+        <div class="map-placeholder large">
+          <span>ルートマップ</span>
+        </div>
+        <div class="route-actions">
+          <button class="secondary ghost">道順を音声で案内</button>
+          <button class="primary">配達開始</button>
+        </div>
+      </article>
+
+      <article class="card proof-panel">
+        <header>
+          <h2>受け渡し証明</h2>
+          <div class="tag">コンプライアンス</div>
+        </header>
+        <div class="proof-actions">
+          <button class="secondary ghost">写真をアップロード</button>
+          <button class="secondary ghost">受取サインを記録</button>
+        </div>
+        <textarea rows="3" placeholder="メモ (例: 置き配: 玄関前)"></textarea>
+        <button class="primary submit-proof">提出</button>
+      </article>
+
+      <article class="card earnings-panel">
+        <header>
+          <h2>日次収益</h2>
+          <div class="tag">報酬</div>
+        </header>
+        <div class="earnings-summary">
+          <p><strong>本日:</strong> ¥8,450 (7 配達)</p>
+          <p><strong>インセンティブ:</strong> ¥1,200 (ピークタイム)</p>
+          <p><strong>出金予定:</strong> 4 月 28 日</p>
+        </div>
+        <button class="primary ghost">詳細を見る</button>
+      </article>
+    </section>
+
+    <section id="operations" class="view columns-3">
+      <article class="card ticket-panel">
+        <header>
+          <h2>サポートチケット</h2>
+          <div class="tag">サポート</div>
+        </header>
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>カテゴリ</th>
+              <th>優先度</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>C-1842</td>
+              <td>注文変更</td>
+              <td><span class="badge warning">高</span></td>
+              <td>対応中</td>
+            </tr>
+            <tr>
+              <td>R-0920</td>
+              <td>店舗設定</td>
+              <td><span class="badge neutral">中</span></td>
+              <td>新規</td>
+            </tr>
+            <tr>
+              <td>D-4410</td>
+              <td>配達トラブル</td>
+              <td><span class="badge danger">緊急</span></td>
+              <td>対応中</td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="primary ghost">キューを見る</button>
+      </article>
+
+      <article class="card risk-panel">
+        <header>
+          <h2>リスク・不正検知</h2>
+          <div class="tag">安全</div>
+        </header>
+        <ul class="alert-list">
+          <li>
+            <strong>高額キャンセルの連続</strong>
+            <p class="muted">ユーザー ID 83910 · 過去 24 時間で 3 件</p>
+            <button class="secondary ghost small">調査</button>
+          </li>
+          <li>
+            <strong>レストラン評価の急落</strong>
+            <p class="muted">Urban Vegan · 平均 4.6 → 3.2</p>
+            <button class="secondary ghost small">詳細</button>
+          </li>
+          <li>
+            <strong>配達員遅延アラート</strong>
+            <p class="muted">渋谷区 · 平均遅延 12 分</p>
+            <button class="secondary ghost small">対応策を提案</button>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card city-panel">
+        <header>
+          <h2>都市別稼働モニタリング</h2>
+          <div class="tag">需給バランス</div>
+        </header>
+        <div class="city-grid">
+          <div class="city-card">
+            <h3>渋谷区</h3>
+            <p>稼働配達員: 112 人</p>
+            <p>注文数/時: 320</p>
+            <p class="muted">需要高 · 追加募集推奨</p>
+          </div>
+          <div class="city-card">
+            <h3>新宿区</h3>
+            <p>稼働配達員: 98 人</p>
+            <p>注文数/時: 260</p>
+            <p class="muted">均衡 · 現状維持</p>
+          </div>
+          <div class="city-card">
+            <h3>港区</h3>
+            <p>稼働配達員: 85 人</p>
+            <p>注文数/時: 295</p>
+            <p class="muted">需要高 · プロモーション検討</p>
+          </div>
+        </div>
+        <div class="city-actions">
+          <button class="primary">配達員募集キャンペーンを作成</button>
+          <button class="secondary ghost">カスタムレポートを生成</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>© 2024 CityEats Platform Mock</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
