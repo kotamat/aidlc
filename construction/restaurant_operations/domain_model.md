@@ -79,3 +79,74 @@
 - 注文や変更依頼は `consumer_experience` からのイベント・API コールで受信し、結果を同コンテキストへ返却する。
 - 調理完了や引き渡し情報は `courier_mobility` に通知して配達プロセスを連携する。
 - 売上データや店舗ステータスは `platform_operations` の監視対象として提供される。
+
+## Mermaid クラス図
+
+```mermaid
+classDiagram
+  direction TB
+  class RestaurantAccount {
+    <<Aggregate>>
+  }
+  class MenuCatalog {
+    <<Aggregate>>
+  }
+  class OrderBoard {
+    <<Aggregate>>
+  }
+  class RevenueLedger {
+    <<Aggregate>>
+  }
+  class NotificationChannel {
+    <<Entity>>
+  }
+  class MenuCategory {
+    <<Entity>>
+  }
+  class MenuItem {
+    <<Entity>>
+  }
+  class OrderTicket {
+    <<Entity>>
+  }
+  class ChangeDirective {
+    <<Entity>>
+  }
+  class OperatingHours {
+    <<ValueObject>>
+  }
+  class DeliveryZone {
+    <<ValueObject>>
+  }
+  class FulfillmentCapability {
+    <<ValueObject>>
+  }
+  class MenuVersion {
+    <<ValueObject>>
+  }
+  class PreparationQueue {
+    <<ValueObject>>
+  }
+  class SalesMetric {
+    <<ValueObject>>
+  }
+  class TrendSnapshot {
+    <<ValueObject>>
+  }
+  class ExportSchedule {
+    <<ValueObject>>
+  }
+  RestaurantAccount o-- NotificationChannel : 通知先
+  RestaurantAccount *-- OperatingHours : 営業時間
+  RestaurantAccount o-- DeliveryZone : 配達エリア
+  RestaurantAccount *-- FulfillmentCapability : 調理能力
+  MenuCatalog o-- MenuCategory : カテゴリ
+  MenuCatalog o-- MenuItem : メニュー
+  MenuCatalog *-- MenuVersion : バージョン
+  OrderBoard o-- OrderTicket : 注文チケット
+  OrderBoard *-- PreparationQueue : 調理キュー
+  OrderBoard o-- ChangeDirective : 変更指示
+  RevenueLedger o-- SalesMetric : 指標
+  RevenueLedger o-- TrendSnapshot : 傾向
+  RevenueLedger *-- ExportSchedule : 出力設定
+```

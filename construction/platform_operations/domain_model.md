@@ -81,3 +81,82 @@
 - チケット・リスク情報は `consumer_experience`, `restaurant_operations`, `courier_mobility` からのイベントで生成され、対応結果はそれぞれへ通知する。
 - 都市指標のデータソースとして配送データ、注文データ、配達員稼働データを取り込み、必要に応じて `courier_mobility` へ追加配達員募集のリクエストを送信する。
 - レポートは経営層や外部監査向けに提供され、`platform_operations` 内部のガバナンスプロセスに活用される。
+
+## Mermaid クラス図
+
+```mermaid
+classDiagram
+  direction TB
+  class SupportTicket {
+    <<Aggregate>>
+  }
+  class RiskCase {
+    <<Aggregate>>
+  }
+  class CityOperationsBoard {
+    <<Aggregate>>
+  }
+  class OpsWorkflow {
+    <<Aggregate>>
+  }
+  class TicketAssignment {
+    <<Entity>>
+  }
+  class ResolutionAction {
+    <<Entity>>
+  }
+  class MitigationPlan {
+    <<Entity>>
+  }
+  class AuditTrail {
+    <<Entity>>
+  }
+  class ResponsePlaybook {
+    <<Entity>>
+  }
+  class WorkflowInstance {
+    <<Entity>>
+  }
+  class TaskStep {
+    <<Entity>>
+  }
+  class TicketMetadata {
+    <<ValueObject>>
+  }
+  class TicketTimeline {
+    <<ValueObject>>
+  }
+  class RiskSignal {
+    <<ValueObject>>
+  }
+  class CaseAssessment {
+    <<ValueObject>>
+  }
+  class CityIndicator {
+    <<ValueObject>>
+  }
+  class AlertRule {
+    <<ValueObject>>
+  }
+  class WorkflowTemplate {
+    <<ValueObject>>
+  }
+  class TaskInstruction {
+    <<ValueObject>>
+  }
+  SupportTicket *-- TicketMetadata : メタデータ
+  SupportTicket *-- TicketTimeline : タイムライン
+  SupportTicket o-- TicketAssignment : 担当
+  SupportTicket o-- ResolutionAction : 対応
+  RiskCase o-- RiskSignal : シグナル
+  RiskCase *-- CaseAssessment : 評価
+  RiskCase o-- MitigationPlan : 対処計画
+  RiskCase o-- AuditTrail : 監査履歴
+  CityOperationsBoard o-- CityIndicator : 指標
+  CityOperationsBoard o-- AlertRule : アラート条件
+  CityOperationsBoard o-- ResponsePlaybook : プレイブック
+  OpsWorkflow *-- WorkflowTemplate : テンプレート
+  OpsWorkflow o-- WorkflowInstance : 実行
+  WorkflowInstance o-- TaskStep : ステップ
+  TaskStep *-- TaskInstruction : 手順
+```

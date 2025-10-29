@@ -78,3 +78,84 @@
 - 契約公開は API レジストリや開発者ポータルへ配信し、各コンテキストの実装チームが参照する。
 - バージョン公開・廃止イベントは `consumer_experience`, `restaurant_operations`, `courier_mobility`, `platform_operations` の開発・運用チームに通知される。
 - スキーマ検証は共通スキーマレジストリや CI パイプラインと連携して自動チェックを行う。
+
+## Mermaid クラス図
+
+```mermaid
+classDiagram
+  direction TB
+  class ApiSuite {
+    <<Aggregate>>
+  }
+  class EndpointSpecification {
+    <<Aggregate>>
+  }
+  class EventContract {
+    <<Aggregate>>
+  }
+  class IntegrationChangeRequest {
+    <<Aggregate>>
+  }
+  class ApiVersion {
+    <<Entity>>
+  }
+  class ChangeHistory {
+    <<Entity>>
+  }
+  class ApprovalTrail {
+    <<Entity>>
+  }
+  class ApiContext {
+    <<ValueObject>>
+  }
+  class CompatibilityMatrix {
+    <<ValueObject>>
+  }
+  class EndpointMeta {
+    <<ValueObject>>
+  }
+  class RequestSchema {
+    <<ValueObject>>
+  }
+  class ResponseSchema {
+    <<ValueObject>>
+  }
+  class ErrorContract {
+    <<ValueObject>>
+  }
+  class EventMeta {
+    <<ValueObject>>
+  }
+  class PayloadSchema {
+    <<ValueObject>>
+  }
+  class SubscriberPolicy {
+    <<ValueObject>>
+  }
+  class RetentionPolicy {
+    <<ValueObject>>
+  }
+  class ChangeProposal {
+    <<ValueObject>>
+  }
+  class ImpactAssessment {
+    <<ValueObject>>
+  }
+  ApiSuite *-- ApiContext : APIコンテキスト
+  ApiSuite o-- ApiVersion : バージョン
+  ApiSuite *-- CompatibilityMatrix : 互換性
+  ApiSuite --> EndpointSpecification : エンドポイント群
+  ApiSuite --> EventContract : イベント契約
+  EndpointSpecification *-- EndpointMeta : メタ情報
+  EndpointSpecification *-- RequestSchema : リクエスト
+  EndpointSpecification *-- ResponseSchema : レスポンス
+  EndpointSpecification *-- ErrorContract : エラー契約
+  EndpointSpecification o-- ChangeHistory : 変更履歴
+  EventContract *-- EventMeta : イベントメタ
+  EventContract *-- PayloadSchema : ペイロード
+  EventContract *-- SubscriberPolicy : 購読ポリシー
+  EventContract *-- RetentionPolicy : 保持ポリシー
+  IntegrationChangeRequest *-- ChangeProposal : 変更提案
+  IntegrationChangeRequest *-- ImpactAssessment : 影響評価
+  IntegrationChangeRequest o-- ApprovalTrail : 承認履歴
+```

@@ -78,3 +78,75 @@
 - 決済ゲートウェイとの連携はトークン化された `PaymentProfile` 経由で行い、真正な支払い処理はプラットフォーム共通サービスに委任する。
 - 配達ステータス更新は `courier_mobility` からのイベント、キャンセル・変更承認は `restaurant_operations` と `platform_operations` からのコールバックを受ける。
 - 内部通知はプッシュ通知サービスやメールサービスなどの外部チャンネルにドメインイベントを介して連携する。
+
+## Mermaid クラス図
+
+```mermaid
+classDiagram
+  direction TB
+  class ConsumerAccount {
+    <<Aggregate>>
+  }
+  class ShoppingCart {
+    <<Aggregate>>
+  }
+  class ConsumerOrder {
+    <<Aggregate>>
+  }
+  class OrderExperienceTimeline {
+    <<Aggregate>>
+  }
+  class PaymentProfile {
+    <<Entity>>
+  }
+  class FavoriteRestaurant {
+    <<Entity>>
+  }
+  class CartItem {
+    <<Entity>>
+  }
+  class ChangeRequest {
+    <<Entity>>
+  }
+  class CancellationRequest {
+    <<Entity>>
+  }
+  class TrackingCheckpoint {
+    <<Entity>>
+  }
+  class NotificationLog {
+    <<Entity>>
+  }
+  class DefaultPreferences {
+    <<ValueObject>>
+  }
+  class AppliedPromotion {
+    <<ValueObject>>
+  }
+  class DeliveryAddress {
+    <<ValueObject>>
+  }
+  class OrderSnapshot {
+    <<ValueObject>>
+  }
+  class FulfillmentStatus {
+    <<ValueObject>>
+  }
+  class EstimatedArrival {
+    <<ValueObject>>
+  }
+  ConsumerAccount o-- PaymentProfile : 支払い方法
+  ConsumerAccount o-- FavoriteRestaurant : お気に入り
+  ConsumerAccount *-- DefaultPreferences : 既定設定
+  ShoppingCart o-- CartItem : カートアイテム
+  ShoppingCart *-- AppliedPromotion : プロモーション
+  ShoppingCart *-- DeliveryAddress : 配送先
+  ConsumerOrder *-- OrderSnapshot : 注文スナップショット
+  ConsumerOrder *-- FulfillmentStatus : 履行状態
+  ConsumerOrder o-- ChangeRequest : 変更申請
+  ConsumerOrder o-- CancellationRequest : キャンセル申請
+  ConsumerOrder --> OrderExperienceTimeline : トラッキング参照
+  OrderExperienceTimeline o-- TrackingCheckpoint : チェックポイント
+  OrderExperienceTimeline *-- EstimatedArrival : ETA
+  OrderExperienceTimeline o-- NotificationLog : 通知履歴
+```

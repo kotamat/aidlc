@@ -90,3 +90,89 @@
 - ナビゲーション・地図サービスとの連携は `RouteOptimizationService` を介して行い、道路情報をドメインに反映する。
 - 配達完了やステータス更新は `consumer_experience` と `restaurant_operations` へイベント通知し、顧客トラッキングと店舗連携を維持する。
 - 報酬支払いはプラットフォーム共通の決済サービスと結合し、Payout イベントで `platform_operations` に報告する。
+
+## Mermaid クラス図
+
+```mermaid
+classDiagram
+  direction TB
+  class CourierAccount {
+    <<Aggregate>>
+  }
+  class JobOfferStream {
+    <<Aggregate>>
+  }
+  class DeliveryAssignment {
+    <<Aggregate>>
+  }
+  class ProofPackage {
+    <<Aggregate>>
+  }
+  class PayoutStatement {
+    <<Aggregate>>
+  }
+  class DeviceBinding {
+    <<Entity>>
+  }
+  class JobOpportunity {
+    <<Entity>>
+  }
+  class RoutePlan {
+    <<Entity>>
+  }
+  class Checkpoint {
+    <<Entity>>
+  }
+  class ProofArtifact {
+    <<Entity>>
+  }
+  class EarningLineItem {
+    <<Entity>>
+  }
+  class EligibilityStatus {
+    <<ValueObject>>
+  }
+  class TransportProfile {
+    <<ValueObject>>
+  }
+  class PreferredZones {
+    <<ValueObject>>
+  }
+  class OfferWindow {
+    <<ValueObject>>
+  }
+  class AssignmentStatus {
+    <<ValueObject>>
+  }
+  class ContactChannel {
+    <<ValueObject>>
+  }
+  class SubmissionStatus {
+    <<ValueObject>>
+  }
+  class StatementPeriod {
+    <<ValueObject>>
+  }
+  class PayoutStatus {
+    <<ValueObject>>
+  }
+  class CompensationBreakdown {
+    <<ValueObject>>
+  }
+  CourierAccount *-- EligibilityStatus : 稼働資格
+  CourierAccount *-- TransportProfile : 移動手段
+  CourierAccount o-- PreferredZones : 希望エリア
+  CourierAccount o-- DeviceBinding : 認証端末
+  JobOfferStream o-- JobOpportunity : 案件候補
+  JobOfferStream *-- OfferWindow : 受諾ウィンドウ
+  DeliveryAssignment *-- AssignmentStatus : ステータス
+  DeliveryAssignment o-- RoutePlan : ルート
+  DeliveryAssignment o-- Checkpoint : 進捗記録
+  DeliveryAssignment *-- ContactChannel : 連絡手段
+  ProofPackage o-- ProofArtifact : 証跡
+  ProofPackage *-- SubmissionStatus : 提出状態
+  PayoutStatement o-- EarningLineItem : 報酬明細
+  PayoutStatement *-- StatementPeriod : 期間
+  PayoutStatement *-- PayoutStatus : 支払状態
+  EarningLineItem *-- CompensationBreakdown : 計算根拠
+```
