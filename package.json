@@ -1,0 +1,9 @@
+{
+  "name": "aidlc-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "bun run src/backend/demo.ts"
+  },
+  "devDependencies": {}
+}
